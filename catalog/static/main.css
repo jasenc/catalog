@@ -49,3 +49,8 @@ form {
 
   margin: 5px;
 }
+
+.navbar-right {
+  padding-top: 15px;
+  padding-right: 15px;
+}
