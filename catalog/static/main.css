@@ -1,0 +1,51 @@
+/*
+===================================
+Custom Styles & Bootstrap Overrides
+===================================
+*/
+
+body {
+  background: -webkit-linear-gradient(90deg, #1D976C 10%, #93F9B9 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #1D976C 10%, #93F9B9 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #1D976C 10%, #93F9B9 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #1D976C 10%, #93F9B9 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #1D976C 10%, #93F9B9 90%); /* W3C */
+}
+
+.jumbotron {
+  padding: 0 10%;
+  margin: 0 auto;
+  margin-bottom: 3em;
+  text-align: right;
+}
+
+form {
+  width: 50%;
+  margin: 0 auto 3em auto;
+}
+
+.navbar-header h3,
+.navbar-header .breadcrumb {
+  display: inline-block;
+}
+
+.breadcrumb {
+  margin: 15px 0 0 10px;
+}
+
+.btn-right {
+  float: right;
+}
+
+.btn-left {
+  float: left;
+}
+
+.alert {
+  padding-top: 0;
+  padding-right: 15px;
+  padding-bottom: 0;
+  padding-left: 15px;
+
+  margin: 5px;
+}

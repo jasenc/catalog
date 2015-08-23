@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+  {% block body %}
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <h3>Catalog Website</h3>
+          <ol class="breadcrumb">
+            <li><a href="{{ url_for('index')}}">Home</a></li>
+            <li class="active">Edit category</li>
+          </ol>
+        </div>
+      </div>
+    </nav>
+    <form class="well bs-component clearfix" action="{{ url_for('editcategory', category_id=category.id) }}" method="POST">
+      <legend>Edit category</legend>
+      {{ form.csrf_token }}
+      <div class="form-group col-xs-12">
+        <label for="category-name">Name</label>
+        {{ form.name(class="form-control", value=category.name) }}
+        {% if form.name.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.name.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <div class="form-group col-xs-12">
+        <label for="category-address">Address</label>
+        {{ form.address(class="form-control", value=category.address) }}
+        {% if form.address.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.address.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <div class="form-group col-xs-6">
+        <label for="category-city">City</label>
+        {{ form.city(class="form-control", value=category.city) }}
+        {% if form.city.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.city.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <div class="form-group col-xs-2">
+        <label for="category-state">State</label>
+        {{ form.state(class="form-control", value=category.state) }}
+        {% if form.state.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.state.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <div class="form-group col-xs-4">
+        <label for="category-zipCode">Zipcode</label>
+        {{ form.zipCode(class="form-control", value=category.zipCode) }}
+        {% if form.zipCode.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.zipCode.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <div class="form-group col-xs-12">
+        <label for="category-website">Website</label>
+        {{ form.website(class="form-control", value=category.website) }}
+        {% if form.website.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.website.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <a href="{{ url_for('index') }}" class="btn btn-default btn-left">Cancel</a>
+      <input type="submit" class="btn btn-success btn-right" value="Edit category">
+    </form>
+
+  {% endblock %}
+</html>

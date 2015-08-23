@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<!-- Jasen Carroll
+Aug 17th, 2015 -->
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Catalog Application</title>
+    <meta name="description" content="Adoption website for items in the Bay Area">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}">
+  </head>
+  {% block body %}{% endblock %}

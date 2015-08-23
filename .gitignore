@@ -1,0 +1,4 @@
+/env
+/instance
+*.pyc
+.DS_Store

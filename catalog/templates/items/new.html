@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+  {% block body %}
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <h3>Catalog Website</h3>
+          <ol class="breadcrumb">
+            <li><a href="{{ url_for('index')}}">Home</a></li>
+            <li><a href="{{ url_for('showcategory', category_id=category.id) }}">{{ category.name }}</a></li>
+            <li class="active">New item</li>
+          </ol>
+        </div>
+      </div>
+    </nav>
+    <form class="well bs-component clearfix col-md-6 col-md-offset-1" action="{{ url_for('newitem', category_id=category.id) }}" method="POST">
+      <legend>New item for {{ category.name }}</legend>
+      {{ form.csrf_token }}
+      <div class="form-group col-xs-12">
+        <label for="item-name">Name</label>
+        {{ form.name(class="form-control", placeholder="Name") }}
+        {% if form.name.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.name.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <div class="form-group col-xs-4">
+        <label for="item-gender">Gender</label>
+        {{ form.gender(class="form-control", placeholder="Gender") }}
+        {% if form.gender.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.gender.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <div class="form-group col-xs-4">
+        <label for="item-dateOfBirth">Date of Birth</label>
+        {{ form.dateOfBirth(class="form-control", placeholder="YYYY/MM/DD") }}
+        {% if form.dateOfBirth.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.dateOfBirth.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <div class="form-group col-xs-4">
+        <label for="item-weight">Weight</label>
+        {{ form.weight(class="form-control", placeholder="Weight") }}
+        {% if form.weight.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.weight.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <div class="form-group col-xs-12">
+        <label for="item-picture">Picture</label>
+        {{ form.picture(class="form-control", placeholder="Picture") }}
+        {% if form.picture.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.picture.errors %}{{ error }}{% endfor %}</div>
+        {% endif %}
+      </div>
+      <a href="{{ url_for('showcategory', category_id=category.id) }}" class="btn btn-default btn-left">Cancel</a>
+      <input type="submit" class="btn btn-success btn-right" value="Add item">
+    </form>
+    <div class="col-md-3 col-md-offset-1 well">
+      <h2 class='text-center'>Contact Info</h2>
+      <table class="table">
+        <tr>
+          <td>Name:</td>
+          <td>{{ category.name }}</td>
+        </tr>
+        <tr>
+          <td>Address:</td>
+          <td>{{ category.address }}</td>
+        </tr>
+        <tr>
+          <td>City:</td>
+          <td>{{ category.city }}</td>
+        </tr>
+        <tr>
+          <td>State:</td>
+          <td>{{ category.state }}</td>
+        </tr>
+        <tr>
+          <td>Zipcode:</td>
+          <td>{{ category.zipCode }}</td>
+        </tr>
+        <tr>
+          <td>Website:</td>
+          <td><a href="http://{{ category.website }}" target="_blank">{{ category.website }}</a></td>
+        </tr>
+      </table>
+
+    </div>
+  {% endblock %}
+</html>

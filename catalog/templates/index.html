@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+  {% block body %}
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <h3>Catalog Website</h3>
+        </div>
+      </div>
+    </nav>
+    <div class="jumbotron">
+      <h1>Catalog Application!</h1>
+      <p>Welcome to the site for items in a catalog.</p>
+      <p>Please choose from the list of categories below to find the item of your dreams.</p>
+    </div>
+
+    {# Let's see if we can comment everything out
+    <!-- <div class="col-md-6 col-md-offset-3 well">
+      <ul class="list-group col-md-8 col-md-offset-2 text-center">
+         For every category display the name along with a button for editing and deleting the category
+        {% for s in categories %}
+        <li class="list-group-item">
+          <h3><a href="{{ url_for('showcategory', category_id=s.id ) }}">{{ s.name }}</a></h3>
+          <a href="{{ url_for('editcategory', category_id=s.id) }}" class="btn btn-info">Edit</a>
+          <a href="{{ url_for('deletecategory', category_id=s.id) }}" class="btn btn-warning">Delete</a>
+        </li>
+        {% endfor %}
+        <li class="list-group-item">
+          <p>Do you know a category that we are missing?</p>
+          <a href="{{ url_for('newcategory')}}" class="btn btn-success">Add category</a>
+      </ul>
+    </div> -->
+    like this? #}
+
+  {% endblock %}
+</html>
