@@ -6,17 +6,15 @@
           <h3>Catalog Website</h3>
         </div>
         <ul class="navbar-right">
-          <div id="signInButton navbar-right">
-            <span class="g-signin"
-              data-scope="openid email"
-              data-clientid="415606554723-8obb7b7ihrc8g19a86tp5cq9rnvra80e.apps.googleusercontent.com"
-              data-redirecturi="postmessage"
-              data-accesstype="offline"
-              data-cookiepolicy="single_host_origin"
-              data-callback="signInCallback"
-              data-approvalprompt="force">
-            </span>
-          </div>
+          <span class="g-signin"
+            data-scope="openid email"
+            data-clientid="415606554723-8obb7b7ihrc8g19a86tp5cq9rnvra80e.apps.googleusercontent.com"
+            data-redirecturi="postmessage"
+            data-accesstype="offline"
+            data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback"
+            data-approvalprompt="force">
+          </span>
         </ul>
       </div>
     </nav>
@@ -26,23 +24,29 @@
       <p>Please choose from the list of categories below to find the item of your dreams.</p>
     </div>
 
-    {# Let's see if we can comment everything out
-    <!-- <div class="col-md-6 col-md-offset-3 well">
+    <div class="col-md-6 col-md-offset-3 well">
       <ul class="list-group col-md-10 col-md-offset-1 text-center">
-         For every category display the name along with a button for editing and deleting the category
-        {% for s in categories %}
+        <!-- For every category display the name along with a button for editing and deleting the category -->
+        {% for c in categories %}
         <li class="list-group-item">
-          <h3><a href="{{ url_for('showCategory', category_id=s.id ) }}">{{ s.name }}</a></h3>
-          <a href="{{ url_for('editCategory', category_id=s.id) }}" class="btn btn-info">Edit</a>
-          <a href="{{ url_for('deleteCategory', category_id=s.id) }}" class="btn btn-warning">Delete</a>
+          <h3><a href="{{ url_for('showCategory', category_id=c.id ) }}">{{ c.name }}</a></h3>
         </li>
         {% endfor %}
         <li class="list-group-item">
-          <p>Do you know a category that we are missing?</p>
-          <a href="{{ url_for('newCategory')}}" class="btn btn-success">Add category</a>
+          <div class="alert alert-success" role="alert">Would you like to have
+            the ability to add new categories, edit them later and maybe even
+            delete them? </br> How about you click this little button: </br>
+            <span class="g-signin"
+              data-scope="openid email"
+              data-clientid="415606554723-8obb7b7ihrc8g19a86tp5cq9rnvra80e.apps.googleusercontent.com"
+              data-redirecturi="postmessage"
+              data-accesstype="offline"
+              data-cookiepolicy="single_host_origin"
+              data-callback="signInCallback"
+              data-approvalprompt="force">
+            </span></div>
       </ul>
-    </div> -->
-    like this? #}
+    </div>
 
     <div id='result'></div>
 
@@ -71,7 +75,7 @@
                 $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
                 setTimeout(function() {
                   // Redirect to the appropriate page, if necessary...
-                  window.location.href = "/index";
+                  window.location.href = "/user";
                 }, 4000);
               } else if (authResult['error']) {
                 // Or if we get no response print to console.log
