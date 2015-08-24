@@ -36,12 +36,14 @@ def index():
         return render_template('index.html', STATE=login_session['state'],
                                categories=categories)
     else:
-        # Create an anti-forgery state token by creatings a unique 32 char string.
+        # Create an anti-forgery state token by creatings a unique 32 char
+        # string.
         state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                         for x in xrange(32))
         # Save that state token to our login_session object.
         login_session['state'] = state
-        # And return the template to log in, while passing along the state string.
+        # And return the template to log in, while passing along the state
+        # string.
         return render_template('index.html', STATE=state,
                                categories=categories)
 

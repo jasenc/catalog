@@ -17,7 +17,7 @@ class categoryForm(Form):
                                                 250 characters!")])
 
 
-class categoryItem(Form):
+class itemForm(Form):
     # Create a name form with a max length of 80 characters to match the DB.
     name = StringField('Name', [validators.InputRequired(),
                                 validators.Length(max=30,

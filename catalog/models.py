@@ -74,12 +74,11 @@ def items_get_by_category(category_id):
 def item_new(category_id, new_item):
     # Instantiate a new item object from the information stored in the
     # newItem object passed through as an arguement.
-    newItem = item(name=new_item["name"],
-                   gender=new_item["gender"],
-                   dateOfBirth=new_item["dateOfBirth"],
-                   picture=new_item["picture"],
-                   category_id=category_id,
-                   weight=new_item["weight"])
+    newItem = Items(name=new_item["name"],
+                    image=new_item["image"],
+                    description=new_item["description"],
+                    user_id=new_item["user_id"],
+                    category_id=new_item["category_id"])
     session.add(newItem)
     session.commit()
 
