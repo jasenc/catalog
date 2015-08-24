@@ -303,7 +303,6 @@ def editItem(category_id, item_id):
     items = models.items_get_by_category(category_id)
     edit_item = models.item_get(item_id)
     form = forms.itemForm(request.form)
-    int_item_weight = int(edit_item.weight)
     if request.method == 'POST' and form.validate():
         edit_item.name = form.name.data
         edit_item.image = form.image.data
@@ -313,8 +312,7 @@ def editItem(category_id, item_id):
                                items=items, form=form)
     else:
         return render_template('items/edit.html', category=category,
-                               item=edit_item, form=form,
-                               int_item_weight=int_item_weight)
+                               item=edit_item, form=form)
 
 
 # Create a delete page for items.
