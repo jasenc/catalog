@@ -18,6 +18,15 @@
         </ul>
       </div>
     </nav>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flashes">
+      {% for message in messages %}
+        <span class="alert-danger">{{ message }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
     <div id='result' class="alert-info"></div>
     <div class="jumbotron">
       <h1>Catalog Application!</h1>
