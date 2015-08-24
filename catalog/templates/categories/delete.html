@@ -11,7 +11,7 @@
         </div>
       </div>
     </nav>
-    <form class="well bs-component clearfix" action="{{ url_for('deletecategory', category_id=category.id) }}" method="POST">
+    <form class="well bs-component clearfix" action="{{ url_for('deleteCategory', category_id=category.id) }}" method="POST">
       <legend>Delete category</legend>
       <div class="form-group col-xs-12">
         <label for="category-name">Name</label>
