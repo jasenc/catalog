@@ -7,9 +7,13 @@
           <ol class="breadcrumb">
             <li><a href="{{ url_for('index')}}">Home</a></li>
             <li><a href="{{ url_for('showCategory', category_id=category.id) }}">{{ category.name }}</a></li>
-            <li class="active">New item</li>
+            <li class="active">New Item</li>
           </ol>
         </div>
+        <ul class="navbar-right">
+          <a href="{{ url_for('gdisconnect') }}"<li>Sign Out</li>
+          <li class="user-pic"><img src="{{ user.picture }}" height="50" width="40"></li>
+        </ul>
       </div>
     </nav>
     <form class="well bs-component clearfix col-md-8 col-md-offset-2" action="{{ url_for('newItem', category_id=category.id) }}" method="POST">

@@ -53,4 +53,16 @@ form {
 .navbar-right {
   padding-top: 15px;
   padding-right: 15px;
+  list-style-type: none
+}
+
+.navbar-right li {
+  display: inline-block;
+}
+
+.user-pic {
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    overflow:hidden;
 }

@@ -22,9 +22,7 @@
         </ul>
       </div>
     </nav>
-
-    <div id='result'></div>
-    
+    <div id='result' class="alert-info"></div>
     <div class="col-md-8 col-md-offset-2 well">
       <h2 class='text-center'>{{ category.name }}</h2>
       <p class ='text-center'>Please view the list below for items ready to be adopted</p>
@@ -73,6 +71,7 @@
             // Upon success response from the server, return successful message to the user
             success: function(result) {
               if (result) {
+                $('#result').html('Login Successful! Please hold while we redirect.')
                 // Update the result div to indicate a successful login
                 setTimeout(function() {
                   // Redirect to the appropriate page, if necessary...

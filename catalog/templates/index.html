@@ -6,7 +6,8 @@
           <h3>Catalog Website</h3>
         </div>
         <ul class="navbar-right">
-          
+          <a href="{{ url_for('gdisconnect') }}"<li>Sign Out</li>
+          <li class="user-pic"><img src="{{ user.picture }}" height="50" width="40"></li>
         </ul>
       </div>
     </nav>
@@ -32,8 +33,8 @@
       </ul>
     </div>
 
-    <div class="col-md-3 col-md-offset-1 weel">
-      <h3>Recently Added Items</h3>
+    <div class="col-md-3 col-md-offset-1 well">
+      <h3 class="text-center">Recently Added Items</h3>
       <ul class="list-group col-md-10 col-md-offset-1 text-center">
 
       </ul>

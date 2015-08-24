@@ -38,8 +38,10 @@ def index():
     #                            STATE=login_session['state'],
     #                            categories=categories)
     if 'email' in login_session.keys():
+        user_id = models.getUserID(login_session['email'])
+        user = models.getUserInfo(user_id)
         return render_template('index.html', categories=categories,
-                               items=items)
+                               items=items, user=user)
     else:
         # Create an anti-forgery state token by creatings a unique 32 char
         # string.
@@ -58,6 +60,8 @@ def index():
 def newCategory():
     # Get the form for categories out of the forms module.
     form = forms.categoryForm(request.form)
+    user_id = models.getUserID(login_session['email'])
+    user = models.getUserInfo(user_id)
     # If the form is submitted via POST and is validated:
     if request.method == 'POST' and form.validate():
         # Create a new category object to store all data from the form.
@@ -73,7 +77,7 @@ def newCategory():
         return redirect(url_for('index'))
     else:
         # If the route is requested via GET, render the new category page.
-        return render_template('categories/new.html', form=form)
+        return render_template('categories/new.html', form=form, user=user)
 
 
 # Create edit category page.
@@ -83,6 +87,8 @@ def editCategory(category_id):
     edit_category = models.category_get(category_id)
     # Get the form out of the form module.
     form = forms.categoryForm(request.form)
+    user_id = models.getUserID(login_session['email'])
+    user = models.getUserInfo(user_id)
     # If the form is submitted via POST and is validated:
     if request.method == 'POST' and form.validate():
         # Update the category with the form data
@@ -96,7 +102,7 @@ def editCategory(category_id):
     else:
         # If the route is requested via GET, render the edit category page.
         return render_template('categories/edit.html', category=edit_category,
-                               form=form)
+                               form=form, user=user)
 
 
 # Create a delete comfirmation page.
@@ -104,6 +110,8 @@ def editCategory(category_id):
 def deleteCategory(category_id):
     # Get the category to be deleted out of the DB.
     delete_category = models.category_get(category_id)
+    user_id = models.getUserID(login_session['email'])
+    user = models.getUserInfo(user_id)
     if request.method == 'POST':
         # Delete the category out of the DB.
         models.category_delete(delete_category)
@@ -112,7 +120,7 @@ def deleteCategory(category_id):
     else:
         # If the route is requested via GET, render the delete category page.
         return render_template('categories/delete.html',
-                               category=delete_category)
+                               category=delete_category, user=user)
 
 
 # Create a page for each category.
@@ -122,10 +130,12 @@ def showCategory(category_id):
     category = models.category_get(category_id)
     # Get the items for that category out of the DB.
     items = models.items_get_by_category(category_id)
+    user_id = models.getUserID(login_session['email'])
+    user = models.getUserInfo(user_id)
     # Show the information on the shetlers show page.
     if 'email' in login_session.keys():
         return render_template('categories/show.html', category=category,
-                               items=items)
+                               items=items, user=user)
     else:
         state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                         for x in xrange(32))
@@ -142,6 +152,8 @@ def newItem(category_id):
     category = models.category_get(category_id)
     items = models.items_get_by_category(category_id)
     form = forms.itemForm(request.form)
+    user_id = models.getUserID(login_session['email'])
+    user = models.getUserInfo(user_id)
     if request.method == 'POST' and form.validate():
         new_item = {
             "name": form.name.data,
@@ -152,9 +164,10 @@ def newItem(category_id):
         }
         models.item_new(category_id, new_item)
         return render_template('categories/show.html', category=category,
-                               items=items)
+                               items=items, user=user)
     else:
-        return render_template('items/new.html', category=category, form=form)
+        return render_template('items/new.html', category=category, form=form,
+                               user=user)
 
 
 # Create a edit page for items.
@@ -165,16 +178,18 @@ def editItem(category_id, item_id):
     items = models.items_get_by_category(category_id)
     edit_item = models.item_get(item_id)
     form = forms.itemForm(request.form)
+    user_id = models.getUserID(login_session['email'])
+    user = models.getUserInfo(user_id)
     if request.method == 'POST' and form.validate():
         edit_item.name = form.name.data
         edit_item.image = form.image.data
         edit_item.description = form.description.data
         models.item_edit(edit_item)
         return render_template('categories/show.html', category=category,
-                               items=items, form=form)
+                               items=items, form=form, user=user)
     else:
         return render_template('items/edit.html', category=category,
-                               item=edit_item, form=form)
+                               item=edit_item, form=form, user=user)
 
 
 # Create a delete page for items.
@@ -183,12 +198,14 @@ def editItem(category_id, item_id):
 def deleteItem(category_id, item_id):
     delete_item = models.item_get(item_id)
     category = models.category_get(category_id)
+    user_id = models.getUserID(login_session['email'])
+    user = models.getUserInfo(user_id)
     if request.method == 'POST':
         models.item_delete(delete_item)
         return redirect(url_for('showCategory', category_id=category.id))
     else:
         return render_template('items/delete.html', category=category,
-                               item=delete_item)
+                               item=delete_item, user=user)
 
 
 # Create a page for each item.
@@ -196,8 +213,10 @@ def deleteItem(category_id, item_id):
 def showitem(category_id, item_id):
     category = models.category_get(category_id)
     item = models.item_get(item_id)
+    user_id = models.getUserID(login_session['email'])
+    user = models.getUserInfo(user_id)
     return render_template('items/show.html', category=category,
-                           item=item)
+                           item=item, user=user)
 
 
 # Create POST route for logging in through Google
@@ -323,9 +342,6 @@ def gdisconnect():
            .format(access_token))
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
-    print type(result)
-    print type(result['status'])
-    print result['status']
     if result['status'] == '200':
         # Reset the user's session.
         del login_session['credentials']
@@ -336,10 +352,12 @@ def gdisconnect():
 
         response = make_response(json.dumps('Successfully disconnected.'), 200)
         response.headers['Content-Type'] = 'application/json'
-        return response
+        flash("Successfully logged out, we're sad to see you go.")
+        return redirect(url_for('index'))
     else:
         # For whatever reason, the given token was invalid.
         response = make_response(
             json.dumps('Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
-        return response
+        flash("Log out unsuccessful!")
+        return redirect(url_for('index'))

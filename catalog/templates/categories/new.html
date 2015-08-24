@@ -6,9 +6,13 @@
           <h3>Catalog Website</h3>
           <ol class="breadcrumb">
             <li><a href="{{ url_for('index')}}">Home</a></li>
-            <li class="active">New category</li>
+            <li class="active">New Category</li>
           </ol>
         </div>
+        <ul class="navbar-right">
+          <a href="{{ url_for('gdisconnect') }}"<li>Sign Out</li>
+          <li class="user-pic"><img src="{{ user.picture }}" height="50" width="40"></li>
+        </ul>
       </div>
     </nav>
     <form class="well bs-component" action="{{ url_for('newCategory') }}" method="POST">

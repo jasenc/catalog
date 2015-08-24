@@ -10,6 +10,10 @@
             <li class="active">{{ item.name }}</li>
           </ol>
         </div>
+        <ul class="navbar-right">
+          <a href="{{ url_for('gdisconnect') }}"<li>Sign Out</li>
+          <li class="user-pic"><img src="{{ user.picture }}" height="50" width="40"></li>
+        </ul>
       </div>
     </nav>
 

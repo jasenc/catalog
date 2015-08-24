@@ -18,7 +18,7 @@ item1 = Items(user_id=1, category_id=1, name="Eat More Better", image="http://ec
 session.add(item1)
 session.commit()
 
-item2 = Items(user_id=1, category_id=1, name="One More Thing", image="http://ecx.images-amazon.com/images/I/41UHH8%2BxvjL._SX322_BO1,204,203,200_.jpg", description="A star from the office, B.J. Novak, writes and book and it's hilarious.")
+item2 = Items(user_id=1, category_id=1, name="One More Thing", image="http://ecx.images-amazon.com/images/I/41UHH8%2BxvjL._SX322_BO1,204,203,200_.jpg", description="A star from the office, B.J. Novak, writes a book and it's hilarious.")
 session.add(item2)
 session.commit()
 
