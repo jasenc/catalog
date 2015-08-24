@@ -23,8 +23,10 @@
         {% for c in categories %}
         <li class="list-group-item">
           <h3><a href="{{ url_for('showCategory', category_id=c.id ) }}">{{ c.name }}</a></h3>
+          {% if user.id == c.user_id %}
           <a href="{{ url_for('editCategory', category_id=c.id) }}" class="btn btn-info">Edit</a>
           <a href="{{ url_for('deleteCategory', category_id=c.id) }}" class="btn btn-warning">Delete</a>
+          {% endif %}
         </li>
         {% endfor %}
         <li class="list-group-item">
@@ -36,7 +38,15 @@
     <div class="col-md-3 col-md-offset-1 well">
       <h3 class="text-center">Recently Added Items</h3>
       <ul class="list-group col-md-10 col-md-offset-1 text-center">
-
+        {% for i in items %}
+        <li class="list-group-item">
+          <h5><a href="#">{{ i.name }}</a></h5>
+          {% if user.id == i.user_id %}
+          <a href="#" class="btn btn-info btn-xs">Edit</a>
+          <a href="#" class="btn btn-warning btn-xs">Delete</a>
+          {% endif %}
+        </li>
+        {% endfor %}
       </ul>
     </div>
   {% endblock %}
