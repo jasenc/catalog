@@ -22,7 +22,7 @@
       <ul class="list-group col-md-10 col-md-offset-1 text-center">
         {% for i in items %}
         <li class="list-group-item">
-          <h3><a href="{{ url_for('showitem', category_id=category.id, item_id=i.id) }}">{{ i.name }}</a></h3>
+          <h3><a href="{{ url_for('showItem', category_id=category.id, item_id=i.id) }}">{{ i.name }}</a></h3>
           {% if user.id == i.user_id %}
           <a href="{{ url_for('editItem', category_id=category.id, item_id=i.id) }}" class="btn btn-info">Edit</a>
           <a href="{{ url_for('deleteItem', category_id=category.id, item_id=i.id) }}" class="btn btn-warning">Delete</a>

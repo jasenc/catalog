@@ -1,5 +1,5 @@
 # Import database
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Users, Categories, Items
 
@@ -73,7 +73,7 @@ def items_get_by_category(category_id):
 
 def items_get_10():
     # Return all items assigned to the category_id passed as an argument.
-    return session.query(Items).limit(10)
+    return session.query(Items).order_by(desc(Items.id)).limit(10).all()
 
 
 def item_new(category_id, new_item):

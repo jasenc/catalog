@@ -2,7 +2,7 @@ from catalog import app
 from catalog import models
 from catalog import forms
 from flask import (render_template, request, redirect, url_for,
-                   make_response, flash)
+                   make_response, flash, jsonify)
 # To keep track of our user sessions we'll import the session dictionary and
 # assign it a local name of login_session.
 from flask import session as login_session
@@ -19,6 +19,8 @@ import httplib2
 import requests
 # We'll import the JSON encoder and decoder for easy interaction with JSON.
 import json
+
+
 # Load up our app information for the Google+ sign in.
 CLIENT_ID = json.loads(
     open('instance/google_client_secrets.json',
@@ -130,10 +132,10 @@ def showCategory(category_id):
     category = models.category_get(category_id)
     # Get the items for that category out of the DB.
     items = models.items_get_by_category(category_id)
-    user_id = models.getUserID(login_session['email'])
-    user = models.getUserInfo(user_id)
     # Show the information on the shetlers show page.
     if 'email' in login_session.keys():
+        user_id = models.getUserID(login_session['email'])
+        user = models.getUserInfo(user_id)
         return render_template('categories/show.html', category=category,
                                items=items, user=user)
     else:
@@ -210,13 +212,17 @@ def deleteItem(category_id, item_id):
 
 # Create a page for each item.
 @app.route('/category/<int:category_id>/item/<int:item_id>/')
-def showitem(category_id, item_id):
+def showItem(category_id, item_id):
     category = models.category_get(category_id)
     item = models.item_get(item_id)
-    user_id = models.getUserID(login_session['email'])
-    user = models.getUserInfo(user_id)
-    return render_template('items/show.html', category=category,
-                           item=item, user=user)
+    if 'email' in login_session.keys():
+        user_id = models.getUserID(login_session['email'])
+        user = models.getUserInfo(user_id)
+        return render_template('items/show.html', category=category,
+                               item=item, user=user)
+    else:
+        return render_template('items/public.html',
+                               category=category, item=item)
 
 
 # Create POST route for logging in through Google
@@ -353,3 +359,20 @@ def gdisconnect():
         response.headers['Content-Type'] = 'application/json'
         flash("Log out unsuccessful!")
         return redirect(url_for('index'))
+
+
+# Making API Endpoints
+@app.route('/category/<int:category_id>/JSON')
+def categoryJSON(category_id):
+    # Get the selected category from the DB.
+    category = models.category_get(category_id)
+    # Get the items for that category out of the DB.
+    items = models.items_get_by_category(category_id)
+    return jsonify(CatalogItems=[i.serialize for i in items])
+
+
+@app.route('/category/<int:category_id>/item/<int:item_id>/JSON')
+def itemJSON(category_id, item_id):
+    category = models.category_get(category_id)
+    item = models.item_get(item_id)
+    return jsonify(CatalogItems=[item.serialize])

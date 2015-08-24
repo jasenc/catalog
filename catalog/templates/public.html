@@ -34,7 +34,7 @@
       <p>Please choose from the list of categories below to find the item of your dreams.</p>
     </div>
 
-    <div class="col-md-6 col-md-offset-3 well">
+    <div class="col-md-6 col-md-offset-1 well">
       <ul class="list-group col-md-10 col-md-offset-1 text-center">
         <!-- For every category display the name along with a button for editing and deleting the category -->
         {% for c in categories %}
@@ -55,6 +55,17 @@
               data-callback="signInCallback"
               data-approvalprompt="force">
             </span></div>
+      </ul>
+    </div>
+
+    <div class="col-md-3 col-md-offset-1 well">
+      <h3 class="text-center">Recently Added Items</h3>
+      <ul class="list-group col-md-10 col-md-offset-1 text-center">
+        {% for i in items %}
+        <li class="list-group-item">
+          <h5><a href=" {{ url_for('showItem', category_id=i.category_id, item_id=i.id) }} ">{{ i.name }}</a></h5>
+        </li>
+        {% endfor %}
       </ul>
     </div>
 
