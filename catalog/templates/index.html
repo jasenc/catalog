@@ -26,23 +26,21 @@
       <p>Please choose from the list of categories below to find the item of your dreams.</p>
     </div>
 
-    {# Let's see if we can comment everything out
-    <!-- <div class="col-md-6 col-md-offset-3 well">
+    <div class="col-md-6 col-md-offset-3 well">
       <ul class="list-group col-md-8 col-md-offset-2 text-center">
-         For every category display the name along with a button for editing and deleting the category
-        {% for s in categories %}
+        <!-- For every category display the name along with a button for editing and deleting the category -->
+        {% for c in categories %}
         <li class="list-group-item">
-          <h3><a href="{{ url_for('showcategory', category_id=s.id ) }}">{{ s.name }}</a></h3>
-          <a href="{{ url_for('editcategory', category_id=s.id) }}" class="btn btn-info">Edit</a>
-          <a href="{{ url_for('deletecategory', category_id=s.id) }}" class="btn btn-warning">Delete</a>
+          <h3><a href="{{ url_for('showCategory', category_id=c.id ) }}">{{ c.name }}</a></h3>
+          <a href="{{ url_for('editCategory', category_id=c.id) }}" class="btn btn-info">Edit</a>
+          <a href="{{ url_for('deleteCategory', category_id=c.id) }}" class="btn btn-warning">Delete</a>
         </li>
         {% endfor %}
         <li class="list-group-item">
           <p>Do you know a category that we are missing?</p>
-          <a href="{{ url_for('newcategory')}}" class="btn btn-success">Add category</a>
+          <a href="{{ url_for('newCategory')}}" class="btn btn-success">Add category</a>
       </ul>
-    </div> -->
-    like this? #}
+    </div>
 
     <div id='result'></div>
 

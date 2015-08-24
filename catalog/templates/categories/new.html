@@ -11,7 +11,7 @@
         </div>
       </div>
     </nav>
-    <form class="well bs-component clearfix" action="{{ url_for('newcategory') }}" method="POST">
+    <form class="well bs-component" action="{{ url_for('newCategory') }}" method="POST">
       <legend>New category</legend>
       {{ form.csrf_token }}
       <div class="form-group col-xs-12">
@@ -22,42 +22,23 @@
         {% endif %}
       </div>
       <div class="form-group col-xs-12">
-        <label for="category-address">Address</label>
-        {{ form.address(class="form-control", placeholder="Address") }}
-        {% if form.address.errors %}
-          <div class="alert alert-info" role="alert">{% for error in form.address.errors %}{{ error }}{% endfor %}</div>
-        {% endif %}
-      </div>
-      <div class="form-group col-xs-6">
-        <label for="category-city">City</label>
-        {{ form.city(class="form-control", placeholder="City") }}
-        {% if form.city.errors %}
-          <div class="alert alert-info" role="alert">{% for error in form.city.errors %}{{ error }}{% endfor %}</div>
-        {% endif %}
-      </div>
-      <div class="form-group col-xs-2">
-        <label for="category-state">State</label>
-        {{ form.state(class="form-control", placeholder="CA") }}
-        {% if form.state.errors %}
-          <div class="alert alert-info" role="alert">{% for error in form.state.errors %}{{ error }}{% endfor %}</div>
-        {% endif %}
-      </div>
-      <div class="form-group col-xs-4">
-        <label for="category-zipCode">Zipcode</label>
-        {{ form.zipCode(class="form-control", placeholder="94601") }}
-        {% if form.zipCode.errors %}
-          <div class="alert alert-info" role="alert">{% for error in form.zipCode.errors %}{{ error }}{% endfor %}</div>
+        <label for="category-image">Image</label>
+        {{ form.image(class="form-control", placeholder="Image") }}
+        {% if form.image.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.image.errors %}{{ error }}{% endfor %}</div>
         {% endif %}
       </div>
       <div class="form-group col-xs-12">
-        <label for="category-website">Website</label>
-        {{ form.website(class="form-control", placeholder="somesoneswebsite.org") }}
-        {% if form.website.errors %}
-          <div class="alert alert-info" role="alert">{% for error in form.website.errors %}{{ error }}{% endfor %}</div>
+        <label for="category-description">Description</label>
+        {{ form.description(class="form-control", placeholder="Description") }}
+        {% if form.description.errors %}
+          <div class="alert alert-info" role="alert">{% for error in form.description.errors %}{{ error }}{% endfor %}</div>
         {% endif %}
       </div>
-      <a href="{{ url_for('index') }}" class="btn btn-default btn-left">Cancel</a>
-      <input type="submit" class="btn btn-success btn-right" value="Add category">
+      <div class="clearfix">
+        <a href="{{ url_for('index') }}" class="btn btn-default btn-left">Cancel</a>
+        <input type="submit" class="btn btn-success btn-right" value="Add category">
+      </div>
     </form>
 
   {% endblock %}

@@ -1,42 +1,32 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, IntegerField, validators
-from wtforms.fields.html5 import DateField
+from wtforms import StringField, TextAreaField, validators
 
 
 class categoryForm(Form):
     # Create a name form with a max length of 80 characters to match the DB.
     name = StringField('Name', [validators.InputRequired(),
-                                validators.Length(max=80,
-                                message="Let's keep this to 80 characters!")])
-    address = StringField('Address', [validators.InputRequired(),
-                                      validators.Length(max=250,
-                                      message="Let's keep this to 250 \
+                                validators.Length(max=30,
+                                message="Let's keep this to 30 characters!")])
+    image = StringField('Image', [validators.InputRequired(),
+                                  validators.Length(max=250,
+                                  message="Let's keep this to 250 \
                                                characters!")])
-    city = StringField('City', [validators.InputRequired(),
-                                validators.Length(max=80,
-                                message="Sorry, cities are at most 80\
-                                         characters!")])
-    state = StringField('State', [validators.InputRequired(),
-                                  validators.Length(max=2,
-                                  message="Sorry, states are 2\
-                                           characters!")])
-    zipCode = StringField('zipCode', [validators.InputRequired(),
-                                      validators.Length(max=6,
-                                      message="Sorry, zipCodes are at most 10\
-                                               characters!")])
-    website = StringField('Website', [validators.InputRequired()])
+    description = TextAreaField('Description', [validators.InputRequired(),
+                                                validators.Length(max=250,
+                                                message="Let's keep this to \
+                                                250 characters!")])
 
 
-class itemForm(Form):
+class categoryItem(Form):
+    # Create a name form with a max length of 80 characters to match the DB.
     name = StringField('Name', [validators.InputRequired(),
-                                validators.Length(max=80,
-                                message="Let's keep this to 80 characters!")])
-    gender = StringField('Gender', [validators.InputRequired(),
-                                    validators.Length(max=6,
-                                    message="Sorry, genders are at most 6\
-                                            characters!")])
-    dateOfBirth = DateField("Date of Birth", [validators.InputRequired()])
-    picture = StringField('Picture', [validators.InputRequired()])
-    weight = IntegerField('Weight', [validators.InputRequired(),
-                                     validators.NumberRange(min=1, max=10,
-                                     message="Between 1 and 10")])
+                                validators.Length(max=30,
+                                message="Let's keep this to 30 characters!")])
+    image = StringField('Image', [validators.InputRequired(),
+                                  validators.Length(max=250,
+                                  message="Let's keep this to 250 \
+                                               characters!")])
+    description = TextAreaField('Description', [validators.InputRequired(),
+                                                validators.Length(max=250,
+                                                message="Let's keep this to \
+                                                250 characters!")])

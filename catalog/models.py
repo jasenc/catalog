@@ -33,28 +33,25 @@ def getUserID(email):
         return None
 
 
-'''
 def category_list():
-    return session.query(category).all()
+    return session.query(Categories).all()
 
 
 def category_new(new_category):
     # Instantiate a new category object from the information stored in the
-    # newcategory object passed through as an arguement.
-    newCategory = category(name=new_category["name"],
-                           address=new_category["address"],
-                           city=new_category["city"],
-                           state=new_category["state"],
-                           zipCode=new_category["zipCode"],
-                           website=new_category["website"])
-    session.add(newcategory)
+    # newCategory object passed through as an arguement.
+    newCategory = Categories(name=new_category["name"],
+                             image=new_category["image"],
+                             description=new_category["description"],
+                             user_id=new_category["user_id"])
+    session.add(newCategory)
     session.commit()
 
 
 def category_get(category_id):
     # Return all information for the category that has the id that was passed
     # through as an argument.
-    return session.query(category).filter_by(id=category_id).one()
+    return session.query(Categories).filter_by(id=category_id).one()
 
 
 def category_edit(edit_category):
@@ -71,7 +68,7 @@ def category_delete(delete_category):
 
 def items_get_by_category(category_id):
     # Return all items assigned to the category_id passed as an argument.
-    return session.query(item).filter_by(category_id=category_id)
+    return session.query(Items).filter_by(category_id=category_id)
 
 
 def item_new(category_id, new_item):
@@ -103,4 +100,3 @@ def item_delete(delete_item):
     # Delete the item passed as an argument out of the DB.
     session.delete(delete_item)
     session.commit()
-'''

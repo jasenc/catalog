@@ -31,8 +31,10 @@ APPLICATION_NAME = "Catalog App"
 @app.route('/index/')
 @app.route('/category/')
 def index():
+    categories = models.category_list()
     if 'state' in login_session.keys():
-        return render_template('index.html', STATE=login_session['state'])
+        return render_template('index.html', STATE=login_session['state'],
+                               categories=categories)
     else:
         # Create an anti-forgery state token by creatings a unique 32 char string.
         state = ''.join(random.choice(string.ascii_uppercase + string.digits)
@@ -40,7 +42,8 @@ def index():
         # Save that state token to our login_session object.
         login_session['state'] = state
         # And return the template to log in, while passing along the state string.
-        return render_template('index.html', STATE=state)
+        return render_template('index.html', STATE=state,
+                               categories=categories)
 
 
 @app.route('/user')
@@ -192,10 +195,10 @@ def gdisconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
 
-'''
+
 # Create new category page.
 @app.route('/category/new', methods=['GET', 'POST'])
-def newcategory():
+def newCategory():
     # Get the form for categories out of the forms module.
     form = forms.categoryForm(request.form)
     # If the form is submitted via POST and is validated:
@@ -205,7 +208,7 @@ def newcategory():
             "name": form.name.data,
             "image": form.image.data,
             "description": form.description.data,
-            "user_id": ???
+            "user_id": models.getUserID(login_session['email'])
         }
         # Pass that object to the DB via the models module.
         models.category_new(new_category)
@@ -218,7 +221,7 @@ def newcategory():
 
 # Create edit category page.
 @app.route('/category/<int:category_id>/edit', methods=['GET', 'POST'])
-def editcategory(category_id):
+def editCategory(category_id):
     # Get the category out of the DB.
     edit_category = models.category_get(category_id)
     # Get the form out of the form module.
@@ -241,7 +244,7 @@ def editcategory(category_id):
 
 # Create a delete comfirmation page.
 @app.route('/category/<int:category_id>/delete', methods=['GET', 'POST'])
-def deletecategory(category_id):
+def deleteCategory(category_id):
     # Get the category to be deleted out of the DB.
     delete_category = models.category_get(category_id)
     if request.method == 'POST':
@@ -257,7 +260,7 @@ def deletecategory(category_id):
 
 # Create a page for each category.
 @app.route('/category/<int:category_id>/')
-def showcategory(category_id):
+def showCategory(category_id):
     # Get the selected category from the DB.
     category = models.category_get(category_id)
     # Get the items for that category out of the DB.
@@ -280,7 +283,8 @@ def newitem(category_id):
             "name": form.name.data,
             "image": form.image.data,
             "description": form.description.data,
-            "user_id": ???
+            "user_id": models.getUserID(login_session['email']),
+            "category_id": category_id
         }
         models.item_new(category_id, new_item)
         return render_template('categories/show.html', category=category,
@@ -332,4 +336,3 @@ def showitem(category_id, item_id):
     item = models.item_get(item_id)
     return render_template('items/show.html', category=category,
                            item=item)
-'''
