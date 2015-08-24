@@ -24,6 +24,8 @@
       <p>Please choose from the list of categories below to find the item of your dreams.</p>
     </div>
 
+    <div id='result'></div>
+
     <div class="col-md-6 col-md-offset-3 well">
       <ul class="list-group col-md-10 col-md-offset-1 text-center">
         <!-- For every category display the name along with a button for editing and deleting the category -->
@@ -48,8 +50,6 @@
       </ul>
     </div>
 
-    <div id='result'></div>
-
     <script>
       function signInCallback(authResult) {
         // If we know that the call was successful and the one-time-use code is present
@@ -72,11 +72,10 @@
             success: function(result) {
               if (result) {
                 // Update the result div to indicate a successful login
-                $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
                 setTimeout(function() {
                   // Redirect to the appropriate page, if necessary...
                   window.location.href = "/index";
-                }, 4000);
+                });
               } else if (authResult['error']) {
                 // Or if we get no response print to console.log
                 console.log('There was an error: ' + authResult['error']);

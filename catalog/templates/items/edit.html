@@ -12,7 +12,7 @@
         </div>
       </div>
     </nav>
-    <form class="well bs-component clearfix col-md-6 col-md-offset-1" action="{{ url_for('editItem', category_id=category.id, item_id=item.id) }}" method="POST">
+    <form class="well bs-component clearfix col-md-8 col-md-offset-2" action="{{ url_for('editItem', category_id=category.id, item_id=item.id) }}" method="POST">
       <legend>Edit item for {{ category.name }}</legend>
       {{ form.csrf_token }}
       <div class="form-group col-xs-12">
@@ -41,33 +41,5 @@
         <input type="submit" class="btn btn-success btn-right" value="Edit Item">
       </div>
     </form>
-    <div class="col-md-3 col-md-offset-1 well">
-      <h2 class='text-center'>Contact Info</h2>
-      <table class="table">
-        <tr>
-          <td>Name:</td>
-          <td>{{ category.name }}</td>
-        </tr>
-        <tr>
-          <td>Address:</td>
-          <td>{{ category.address }}</td>
-        </tr>
-        <tr>
-          <td>City:</td>
-          <td>{{ category.city }}</td>
-        </tr>
-        <tr>
-          <td>State:</td>
-          <td>{{ category.state }}</td>
-        </tr>
-        <tr>
-          <td>Zipcode:</td>
-          <td>{{ category.zipCode }}</td>
-        </tr>
-        <tr>
-          <td>Website:</td>
-          <td><a href="http://{{ category.website }}" target="_blank">{{ category.website }}</a></td>
-        </tr>
-      </table>
   {% endblock %}
 </html>

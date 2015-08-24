@@ -12,7 +12,7 @@
         </div>
       </div>
     </nav>
-    <form class="well bs-component clearfix col-md-6 col-md-offset-1" action="{{ url_for('deleteItem', category_id=category.id, item_id=item.id) }}" method="POST">
+    <form class="well bs-component clearfix col-md-8 col-md-offset-2" action="{{ url_for('deleteItem', category_id=category.id, item_id=item.id) }}" method="POST">
       <legend>Delete category</legend>
       <div class="form-group col-xs-12">
         <label for="category-name">Name</label>
@@ -21,33 +21,5 @@
       <a href="{{ url_for('showCategory', category_id=category.id) }}" class="btn btn-default btn-left">Cancel</a>
       <input type="submit" class="btn btn-danger btn-right" value="Delete Item">
     </form>
-    <div class="col-md-3 col-md-offset-1 well">
-      <h2 class='text-center'>Contact Info</h2>
-      <table class="table">
-        <tr>
-          <td>Name:</td>
-          <td>{{ category.name }}</td>
-        </tr>
-        <tr>
-          <td>Address:</td>
-          <td>{{ category.address }}</td>
-        </tr>
-        <tr>
-          <td>City:</td>
-          <td>{{ category.city }}</td>
-        </tr>
-        <tr>
-          <td>State:</td>
-          <td>{{ category.state }}</td>
-        </tr>
-        <tr>
-          <td>Zipcode:</td>
-          <td>{{ category.zipCode }}</td>
-        </tr>
-        <tr>
-          <td>Website:</td>
-          <td><a href="http://{{ category.website }}" target="_blank">{{ category.website }}</a></td>
-        </tr>
-      </table>
   {% endblock %}
 </html>

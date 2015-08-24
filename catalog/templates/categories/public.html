@@ -23,6 +23,8 @@
       </div>
     </nav>
 
+    <div id='result'></div>
+    
     <div class="col-md-8 col-md-offset-2 well">
       <h2 class='text-center'>{{ category.name }}</h2>
       <p class ='text-center'>Please view the list below for items ready to be adopted</p>
@@ -47,10 +49,7 @@
             </span></div>
       </ul>
     </div>
-    <div id='result'></div>
-
     <div id="redirectPath" style="display: none">/category/{{ category.id }}</div>
-
     <script>
       function signInCallback(authResult) {
         // Save the redirect path from the hidden div
@@ -75,11 +74,10 @@
             success: function(result) {
               if (result) {
                 // Update the result div to indicate a successful login
-                $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
                 setTimeout(function() {
                   // Redirect to the appropriate page, if necessary...
                   window.location.href = redirect;
-                }, 4000);
+                });
               } else if (authResult['error']) {
                 // Or if we get no response print to console.log
                 console.log('There was an error: ' + authResult['error']);
