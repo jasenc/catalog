@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+  {% block body %}
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <h3>Catalog Website</h3>
+        </div>
+        <ul class="navbar-right">
+          
+        </ul>
+      </div>
+    </nav>
+    <div class="jumbotron">
+      <h1>Catalog Application!</h1>
+      <p>Welcome to the site for items in a catalog.</p>
+      <p>Please choose from the list of categories below to find the item of your dreams.</p>
+    </div>
+
+    <div class="col-md-6 col-md-offset-1 well">
+      <ul class="list-group col-md-10 col-md-offset-1 text-center">
+        <!-- For every category display the name along with a button for editing and deleting the category -->
+        {% for c in categories %}
+        <li class="list-group-item">
+          <h3><a href="{{ url_for('showCategory', category_id=c.id ) }}">{{ c.name }}</a></h3>
+          <a href="{{ url_for('editCategory', category_id=c.id) }}" class="btn btn-info">Edit</a>
+          <a href="{{ url_for('deleteCategory', category_id=c.id) }}" class="btn btn-warning">Delete</a>
+        </li>
+        {% endfor %}
+        <li class="list-group-item">
+          <p>Do you know a category that we are missing?</p>
+          <a href="{{ url_for('newCategory')}}" class="btn btn-success">Add category</a>
+      </ul>
+    </div>
+
+    <div class="col-md-3 col-md-offset-1 weel">
+      <h3>Recently Added Items</h3>
+      <ul class="list-group col-md-10 col-md-offset-1 text-center">
+
+      </ul>
+    </div>
+  {% endblock %}
+</html>

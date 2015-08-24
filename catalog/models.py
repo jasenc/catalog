@@ -71,6 +71,11 @@ def items_get_by_category(category_id):
     return session.query(Items).filter_by(category_id=category_id)
 
 
+def items_get_10():
+    # Return all items assigned to the category_id passed as an argument.
+    return session.query(Items).limit(10)
+
+
 def item_new(category_id, new_item):
     # Instantiate a new item object from the information stored in the
     # newItem object passed through as an arguement.

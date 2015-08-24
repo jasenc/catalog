@@ -32,12 +32,14 @@ APPLICATION_NAME = "Catalog App"
 @app.route('/category/')
 def index():
     categories = models.category_list()
+    items = models.items_get_10()
     # if 'state' in login_session.keys():
     #     return render_template('/user/index.html',
     #                            STATE=login_session['state'],
     #                            categories=categories)
     if 'email' in login_session.keys():
-        return render_template('user/index.html', categories=categories)
+        return render_template('index.html', categories=categories,
+                               items=items)
     else:
         # Create an anti-forgery state token by creatings a unique 32 char
         # string.
@@ -47,13 +49,8 @@ def index():
         login_session['state'] = state
         # And return the template to log in, while passing along the state
         # string.
-        return render_template('public/index.html', STATE=state,
-                               categories=categories)
-
-
-@app.route('/user')
-def user():
-    return "hello user"
+        return render_template('public.html', STATE=state,
+                               categories=categories, items=items)
 
 
 # Create new category page.
@@ -127,11 +124,14 @@ def showCategory(category_id):
     items = models.items_get_by_category(category_id)
     # Show the information on the shetlers show page.
     if 'email' in login_session.keys():
-        return render_template('user/categories/show.html', category=category,
+        return render_template('categories/show.html', category=category,
                                items=items)
     else:
-        return render_template('public/categories/show.html',
-                               category=category, items=items)
+        state = ''.join(random.choice(string.ascii_uppercase + string.digits)
+                        for x in xrange(32))
+        login_session['state'] = state
+        return render_template('categories/public.html',
+                               category=category, items=items, STATE=state)
 
 
 # The following routes are essentially repeats of the previous ones but with

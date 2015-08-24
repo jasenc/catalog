@@ -6,17 +6,15 @@
           <h3>Catalog Website</h3>
         </div>
         <ul class="navbar-right">
-          <div id="signInButton navbar-right">
-            <span class="g-signin"
-              data-scope="openid email"
-              data-clientid="415606554723-8obb7b7ihrc8g19a86tp5cq9rnvra80e.apps.googleusercontent.com"
-              data-redirecturi="postmessage"
-              data-accesstype="offline"
-              data-cookiepolicy="single_host_origin"
-              data-callback="signInCallback"
-              data-approvalprompt="force">
-            </span>
-          </div>
+          <span class="g-signin"
+            data-scope="openid email"
+            data-clientid="415606554723-8obb7b7ihrc8g19a86tp5cq9rnvra80e.apps.googleusercontent.com"
+            data-redirecturi="postmessage"
+            data-accesstype="offline"
+            data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback"
+            data-approvalprompt="force">
+          </span>
         </ul>
       </div>
     </nav>
@@ -32,13 +30,21 @@
         {% for c in categories %}
         <li class="list-group-item">
           <h3><a href="{{ url_for('showCategory', category_id=c.id ) }}">{{ c.name }}</a></h3>
-          <a href="{{ url_for('editCategory', category_id=c.id) }}" class="btn btn-info">Edit</a>
-          <a href="{{ url_for('deleteCategory', category_id=c.id) }}" class="btn btn-warning">Delete</a>
         </li>
         {% endfor %}
         <li class="list-group-item">
-          <p>Do you know a category that we are missing?</p>
-          <a href="{{ url_for('newCategory')}}" class="btn btn-success">Add category</a>
+          <div class="alert alert-success" role="alert">Would you like to have
+            the ability to add new categories, edit them later and maybe even
+            delete them? </br> How about you click this little button: </br>
+            <span class="g-signin"
+              data-scope="openid email"
+              data-clientid="415606554723-8obb7b7ihrc8g19a86tp5cq9rnvra80e.apps.googleusercontent.com"
+              data-redirecturi="postmessage"
+              data-accesstype="offline"
+              data-cookiepolicy="single_host_origin"
+              data-callback="signInCallback"
+              data-approvalprompt="force">
+            </span></div>
       </ul>
     </div>
 
@@ -69,7 +75,7 @@
                 $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
                 setTimeout(function() {
                   // Redirect to the appropriate page, if necessary...
-                  window.location.href = "/user";
+                  window.location.href = "/index";
                 }, 4000);
               } else if (authResult['error']) {
                 // Or if we get no response print to console.log

@@ -20,35 +20,5 @@
           <li class="list-group-item">{{ item.description }}</li>
       </ul>
     </div>
-    <div class="col-md-3 col-md-offset-1 well">
-      <h2 class='text-center'>Contact Info</h2>
-      <table class="table">
-        <tr>
-          <td>Name:</td>
-          <td>{{ category.name }}</td>
-        </tr>
-        <tr>
-          <td>Address:</td>
-          <td>{{ category.address }}</td>
-        </tr>
-        <tr>
-          <td>City:</td>
-          <td>{{ category.city }}</td>
-        </tr>
-        <tr>
-          <td>State:</td>
-          <td>{{ category.state }}</td>
-        </tr>
-        <tr>
-          <td>Zipcode:</td>
-          <td>{{ category.zipCode }}</td>
-        </tr>
-        <tr>
-          <td>Website:</td>
-          <td><a href="http://{{ category.website }}" target="_blank">{{ category.website }}</a></td>
-        </tr>
-      </table>
-
-    </div>
   {% endblock %}
 </html>
