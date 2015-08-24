@@ -6,7 +6,7 @@
           <h3>Catalog Website</h3>
           <ol class="breadcrumb">
             <li><a href="{{ url_for('index')}}">Home</a></li>
-            <li><a href="{{ url_for('showcategory', category_id=category.id) }}">{{ category.name }}</a></li>
+            <li><a href="{{ url_for('showCategory', category_id=category.id) }}">{{ category.name }}</a></li>
             <li class="active">{{ item.name }}</li>
           </ol>
         </div>
@@ -16,10 +16,8 @@
     <div class="col-md-6 col-md-offset-1 well">
       <h2 class='text-center'>{{ item.name }}</h2>
       <ul class="list-group col-md-10 col-md-offset-1 text-center">
-          <li class="list-group-item">{{ item.gender }}</li>
-          <li class="list-group-item">{{ item.dateOfBirth }}</li>
-          <li class="list-group-item"><img src="{{ item.picture }}"></li>
-          <li class="list-group-item">{{ item.weight }}</li>
+          <li class="list-group-item"><img src="{{ item.image }}"></li>
+          <li class="list-group-item">{{ item.description }}</li>
       </ul>
     </div>
     <div class="col-md-3 col-md-offset-1 well">

@@ -274,7 +274,7 @@ def showCategory(category_id):
 # more arguments passed around.
 # Create a new page for items.
 @app.route('/category/<int:category_id>/item/new', methods=['GET', 'POST'])
-def newitem(category_id):
+def newItem(category_id):
     category = models.category_get(category_id)
     items = models.items_get_by_category(category_id)
     form = forms.itemForm(request.form)
@@ -296,7 +296,7 @@ def newitem(category_id):
 # Create a edit page for items.
 @app.route('/category/<int:category_id>/item/<int:item_id>/edit',
            methods=['GET', 'POST'])
-def edititem(category_id, item_id):
+def editItem(category_id, item_id):
     category = models.category_get(category_id)
     items = models.items_get_by_category(category_id)
     edit_item = models.item_get(item_id)
@@ -318,12 +318,12 @@ def edititem(category_id, item_id):
 # Create a delete page for items.
 @app.route('/category/<int:category_id>/item/<int:item_id>/delete',
            methods=['GET', 'POST'])
-def deleteitem(category_id, item_id):
+def deleteItem(category_id, item_id):
     delete_item = models.item_get(item_id)
     category = models.category_get(category_id)
     if request.method == 'POST':
         models.item_delete(delete_item)
-        return redirect(url_for('showcategory', category_id=category.id))
+        return redirect(url_for('showCategory', category_id=category.id))
     else:
         return render_template('items/delete.html', category=category,
                                item=delete_item)

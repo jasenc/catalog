@@ -32,7 +32,7 @@
          For every category display the name along with a button for editing and deleting the category
         {% for s in categories %}
         <li class="list-group-item">
-          <h3><a href="{{ url_for('showcategory', category_id=s.id ) }}">{{ s.name }}</a></h3>
+          <h3><a href="{{ url_for('showCategory', category_id=s.id ) }}">{{ s.name }}</a></h3>
           <a href="{{ url_for('editCategory', category_id=s.id) }}" class="btn btn-info">Edit</a>
           <a href="{{ url_for('deleteCategory', category_id=s.id) }}" class="btn btn-warning">Delete</a>
         </li>

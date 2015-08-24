@@ -6,13 +6,13 @@
           <h3>Catalog Website</h3>
           <ol class="breadcrumb">
             <li><a href="{{ url_for('index')}}">Home</a></li>
-            <li><a href="{{ url_for('showcategory', category_id=category.id) }}">{{ category.name }}</a></li>
+            <li><a href="{{ url_for('showCategory', category_id=category.id) }}">{{ category.name }}</a></li>
             <li class="active">Edit item</li>
           </ol>
         </div>
       </div>
     </nav>
-    <form class="well bs-component clearfix col-md-6 col-md-offset-1" action="{{ url_for('edititem', category_id=category.id, item_id=item.id) }}" method="POST">
+    <form class="well bs-component clearfix col-md-6 col-md-offset-1" action="{{ url_for('editItem', category_id=category.id, item_id=item.id) }}" method="POST">
       <legend>New item for {{ category.name }}</legend>
       {{ form.csrf_token }}
       <div class="form-group col-xs-12">
@@ -50,7 +50,7 @@
           <div class="alert alert-info" role="alert">{% for error in form.picture.errors %}{{ error }}{% endfor %}</div>
         {% endif %}
       </div>
-      <a href="{{ url_for('showcategory', category_id=category.id) }}" class="btn btn-default btn-left">Cancel</a>
+      <a href="{{ url_for('showCategory', category_id=category.id) }}" class="btn btn-default btn-left">Cancel</a>
       <input type="submit" class="btn btn-success btn-right" value="Edit item">
     </form>
     <div class="col-md-3 col-md-offset-1 well">

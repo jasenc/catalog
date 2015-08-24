@@ -6,19 +6,19 @@
           <h3>Catalog Website</h3>
           <ol class="breadcrumb">
             <li><a href="{{ url_for('index')}}">Home</a></li>
-            <li><a href="{{ url_for('showcategory', category_id=category.id) }}">{{ category.name }}</a></li>
+            <li><a href="{{ url_for('showCategory', category_id=category.id) }}">{{ category.name }}</a></li>
             <li class="active">Delete item</li>
           </ol>
         </div>
       </div>
     </nav>
-    <form class="well bs-component clearfix col-md-6 col-md-offset-1" action="{{ url_for('deleteitem', category_id=category.id, item_id=item.id) }}" method="POST">
+    <form class="well bs-component clearfix col-md-6 col-md-offset-1" action="{{ url_for('deleteItem', category_id=category.id, item_id=item.id) }}" method="POST">
       <legend>Delete category</legend>
       <div class="form-group col-xs-12">
         <label for="category-name">Name</label>
         <input type="text" class="form-control"  id="category-name" value="{{ item.name }}" name="name" disabled>
       </div>
-      <a href="{{ url_for('showcategory', category_id=category.id) }}" class="btn btn-default btn-left">Cancel</a>
+      <a href="{{ url_for('showCategory', category_id=category.id) }}" class="btn btn-default btn-left">Cancel</a>
       <input type="submit" class="btn btn-danger btn-right" value="Delete item">
     </form>
     <div class="col-md-3 col-md-offset-1 well">

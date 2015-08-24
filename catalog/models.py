@@ -73,21 +73,21 @@ def items_get_by_category(category_id):
 
 def item_new(category_id, new_item):
     # Instantiate a new item object from the information stored in the
-    # newitem object passed through as an arguement.
+    # newItem object passed through as an arguement.
     newItem = item(name=new_item["name"],
                    gender=new_item["gender"],
                    dateOfBirth=new_item["dateOfBirth"],
                    picture=new_item["picture"],
                    category_id=category_id,
                    weight=new_item["weight"])
-    session.add(newitem)
+    session.add(newItem)
     session.commit()
 
 
 def item_get(item_id):
     # Return the information for the item that matches the id passed as an
     # argument.
-    return session.query(item).filter_by(id=item_id).one()
+    return session.query(Items).filter_by(id=item_id).one()
 
 
 def item_edit(edit_item):
