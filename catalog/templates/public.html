@@ -19,15 +19,15 @@
       </div>
     </nav>
     {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <div class="flashes">
-      {% for message in messages %}
-        <span class="alert-danger">{{ message }}</span>
-      {% endfor %}
-    </div>
-    {% endif %}
+      {% if messages %}
+        {% for message in messages %}
+          <div id"result" class="alert alert-info flashes">
+            <strong>Bummer!</strong> {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
     {% endwith %}
-    <div id='result' class="alert-info"></div>
+    <div id="result" class="alert alert-info"></div>
     <div class="jumbotron">
       <h1>Catalog Application!</h1>
       <p>Welcome to the site for items in a catalog.</p>
@@ -90,11 +90,13 @@
             // Upon success response from the server, return successful message to the user
             success: function(result) {
               if (result) {
-                $('#result').html('Login Successful! Please hold while we redirect.')
+                $('#result').html("<strong>Yay!</strong>I'm so happy you're logged in.");
+                $('#result').show();
                 // Update the result div to indicate a successful login
                 setTimeout(function() {
                   // Redirect to the appropriate page, if necessary...
                   window.location.href = "/index";
+                  $('#result').hide();
                 }, 2000);
               } else if (authResult['error']) {
                 // Or if we get no response print to console.log

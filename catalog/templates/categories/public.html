@@ -71,11 +71,13 @@
             // Upon success response from the server, return successful message to the user
             success: function(result) {
               if (result) {
-                $('#result').html('Login Successful! Please hold while we redirect.')
+                $('#result').html('Login Successful! Please hold while we redirect.');
+                $('#result').show();
                 // Update the result div to indicate a successful login
                 setTimeout(function() {
                   // Redirect to the appropriate page, if necessary...
                   window.location.href = redirect;
+                  $('#result').hide();
                 });
               } else if (authResult['error']) {
                 // Or if we get no response print to console.log

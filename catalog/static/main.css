@@ -66,3 +66,7 @@ form {
     border-radius:50%;
     overflow:hidden;
 }
+
+#result {
+  display:none;
+}
