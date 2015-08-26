@@ -23,7 +23,7 @@
         <label for="category-name">Name</label>
         {{ form.name(class="form-control", value=category.name, disabled="True") }}
       </div>
-      <a href="{{ url_for('showCategory', category_id=category.id) }}" class="btn btn-default btn-left">Cancel</a>
+      <a href="{{ url_for('showItem', category_id=category.id, item_id=item.id) }}" class="btn btn-default btn-left">Cancel</a>
       <input type="submit" class="btn btn-danger btn-right" value="Delete Item">
     </form>
   {% endblock %}

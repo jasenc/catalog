@@ -41,7 +41,7 @@
         {% endif %}
       </div>
       <div class="clearfix">
-        <a href="{{ url_for('showCategory', category_id=category.id) }}" class="btn btn-default btn-left">Cancel</a>
+        <a href="{{ url_for('showItem', category_id=category.id, item_id=item.id) }}" class="btn btn-default btn-left">Cancel</a>
         <input type="submit" class="btn btn-success btn-right" value="Edit Item">
       </div>
     </form>

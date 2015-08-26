@@ -213,7 +213,7 @@ def editItem(category_id, item_id):
                 items = models.items_get_by_category(category_id)
                 return render_template('categories/show.html',
                                        category=category,
-                                       items=items, form=form, user=user)
+                                       items=items, user=user)
             else:
                 return render_template('items/edit.html', category=category,
                                        item=edit_item, form=form, user=user)
