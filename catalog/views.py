@@ -35,10 +35,6 @@ APPLICATION_NAME = "Catalog App"
 def index():
     categories = models.category_list()
     items = models.items_get_10()
-    # if 'state' in login_session.keys():
-    #     return render_template('/user/index.html',
-    #                            STATE=login_session['state'],
-    #                            categories=categories)
     if 'email' in login_session.keys():
         user_id = models.getUserID(login_session['email'])
         user = models.getUserInfo(user_id)
@@ -60,69 +56,90 @@ def index():
 # Create new category page.
 @app.route('/category/new', methods=['GET', 'POST'])
 def newCategory():
-    # Get the form for categories out of the forms module.
-    form = forms.categoryForm(request.form)
-    user_id = models.getUserID(login_session['email'])
-    user = models.getUserInfo(user_id)
-    # If the form is submitted via POST and is validated:
-    if request.method == 'POST' and form.validate():
-        # Create a new category object to store all data from the form.
-        new_category = {
-            "name": form.name.data,
-            "image": form.image.data,
-            "description": form.description.data,
-            "user_id": models.getUserID(login_session['email'])
-        }
-        # Pass that object to the DB via the models module.
-        models.category_new(new_category)
-        # Redirect to the index page.
-        return redirect(url_for('index'))
+    # If the user is logged in:
+    if 'email' in login_session.keys():
+        # Get the form for categories out of the forms module.
+        form = forms.categoryForm(request.form)
+        user_id = models.getUserID(login_session['email'])
+        user = models.getUserInfo(user_id)
+        # If the form is submitted via POST and is validated:
+        if request.method == 'POST' and form.validate():
+            # Create a new category object to store all data from the form.
+            new_category = {
+                "name": form.name.data,
+                "image": form.image.data,
+                "description": form.description.data,
+                "user_id": models.getUserID(login_session['email'])
+            }
+            # Pass that object to the DB via the models module.
+            models.category_new(new_category)
+            # Redirect to the index page.
+            return redirect(url_for('index'))
+        else:
+            # If the route is requested via GET, render the new category page.
+            return render_template('categories/new.html', form=form, user=user)
     else:
-        # If the route is requested via GET, render the new category page.
-        return render_template('categories/new.html', form=form, user=user)
+        return redirect(url_for('index'))
 
 
 # Create edit category page.
 @app.route('/category/<int:category_id>/edit', methods=['GET', 'POST'])
 def editCategory(category_id):
-    # Get the category out of the DB.
-    edit_category = models.category_get(category_id)
-    # Get the form out of the form module.
-    form = forms.categoryForm(request.form)
-    user_id = models.getUserID(login_session['email'])
-    user = models.getUserInfo(user_id)
-    # If the form is submitted via POST and is validated:
-    if request.method == 'POST' and form.validate():
-        # Update the category with the form data
-        edit_category.name = form.name.data
-        edit_category.image = form.image.data
-        edit_category.description = form.description.data
-        # Send the updated category back to the DB.
-        models.category_edit(edit_category)
-        # Redirect to the index page.
-        return redirect(url_for('index'))
+    # Adding logged in user verification to every route here on out.
+    if 'email' in login_session.keys():
+        # Get the category out of the DB.
+        edit_category = models.category_get(category_id)
+        # Let's make sure this user is the cateogory owner.
+        user_id = models.getUserID(login_session['email'])
+        if edit_category.user_id == user_id:
+            # Get the form out of the form module.
+            form = forms.categoryForm(request.form)
+            # If the form is submitted via POST and is validated:
+            if request.method == 'POST' and form.validate():
+                # Update the category with the form data
+                edit_category.name = form.name.data
+                edit_category.image = form.image.data
+                edit_category.description = form.description.data
+                # Send the updated category back to the DB.
+                models.category_edit(edit_category)
+                # Redirect to the index page.
+                return redirect(url_for('index'))
+            else:
+                # If the route is requested via GET render the edit page.
+                user = models.getUserInfo(user_id)
+                return render_template('categories/edit.html',
+                                       category=edit_category,
+                                       form=form, user=user)
+        else:
+            flash("You aren't the owner for that.")
+            return redirect(url_for('index'))
     else:
-        # If the route is requested via GET, render the edit category page.
-        return render_template('categories/edit.html', category=edit_category,
-                               form=form, user=user)
+        return redirect(url_for('index'))
 
 
 # Create a delete comfirmation page.
 @app.route('/category/<int:category_id>/delete', methods=['GET', 'POST'])
 def deleteCategory(category_id):
-    # Get the category to be deleted out of the DB.
-    delete_category = models.category_get(category_id)
-    user_id = models.getUserID(login_session['email'])
-    user = models.getUserInfo(user_id)
-    if request.method == 'POST':
-        # Delete the category out of the DB.
-        models.category_delete(delete_category)
-        # Redirect to the index page.
-        return redirect(url_for('index'))
+    if 'email' in login_session.keys():
+        # Get the category to be deleted out of the DB.
+        delete_category = models.category_get(category_id)
+        user_id = models.getUserID(login_session['email'])
+        if delete_category.user_id == user_id:
+            if request.method == 'POST':
+                # Delete the category out of the DB.
+                models.category_delete(delete_category)
+                # Redirect to the index page.
+                return redirect(url_for('index'))
+            else:
+                # If the route is requested via GET render the delete page.
+                user = models.getUserInfo(user_id)
+                return render_template('categories/delete.html',
+                                       category=delete_category, user=user)
+        else:
+            flash("You aren't the owner for that.")
+            return redirect(url_for('index'))
     else:
-        # If the route is requested via GET, render the delete category page.
-        return render_template('categories/delete.html',
-                               category=delete_category, user=user)
+        return redirect(url_for('index'))
 
 
 # Create a page for each category.
@@ -151,63 +168,82 @@ def showCategory(category_id):
 # Create a new page for items.
 @app.route('/category/<int:category_id>/item/new', methods=['GET', 'POST'])
 def newItem(category_id):
-    category = models.category_get(category_id)
-    items = models.items_get_by_category(category_id)
-    form = forms.itemForm(request.form)
-    user_id = models.getUserID(login_session['email'])
-    user = models.getUserInfo(user_id)
-    if request.method == 'POST' and form.validate():
-        new_item = {
-            "name": form.name.data,
-            "image": form.image.data,
-            "description": form.description.data,
-            "user_id": models.getUserID(login_session['email']),
-            "category_id": category_id
-        }
-        models.item_new(category_id, new_item)
-        return render_template('categories/show.html', category=category,
-                               items=items, user=user)
+    if 'email' in login_session.keys():
+        form = forms.itemForm(request.form)
+        user_id = models.getUserID(login_session['email'])
+        user = models.getUserInfo(user_id)
+        category = models.category_get(category_id)
+        if request.method == 'POST' and form.validate():
+            new_item = {
+                "name": form.name.data,
+                "image": form.image.data,
+                "description": form.description.data,
+                "user_id": models.getUserID(login_session['email']),
+                "category_id": category_id
+            }
+            models.item_new(category_id, new_item)
+            items = models.items_get_by_category(category_id)
+            return render_template('categories/show.html', category=category,
+                                   items=items, user=user)
+        else:
+            return render_template('items/new.html', category=category,
+                                   form=form, user=user)
     else:
-        return render_template('items/new.html', category=category, form=form,
-                               user=user)
+        return redirect(url_for('showCategory', category_id=category_id))
 
 
 # Create a edit page for items.
 @app.route('/category/<int:category_id>/item/<int:item_id>/edit',
            methods=['GET', 'POST'])
 def editItem(category_id, item_id):
-    category = models.category_get(category_id)
-    items = models.items_get_by_category(category_id)
-    edit_item = models.item_get(item_id)
-    form = forms.itemForm(request.form)
-    user_id = models.getUserID(login_session['email'])
-    user = models.getUserInfo(user_id)
-    if request.method == 'POST' and form.validate():
-        edit_item.name = form.name.data
-        edit_item.image = form.image.data
-        edit_item.description = form.description.data
-        models.item_edit(edit_item)
-        return render_template('categories/show.html', category=category,
-                               items=items, form=form, user=user)
+    if 'email' in login_session.keys():
+        edit_item = models.item_get(item_id)
+        user_id = models.getUserID(login_session['email'])
+        if edit_item.user_id == user_id:
+            form = forms.itemForm(request.form)
+            user = models.getUserInfo(user_id)
+            category = models.category_get(category_id)
+            if request.method == 'POST' and form.validate():
+                edit_item.name = form.name.data
+                edit_item.image = form.image.data
+                edit_item.description = form.description.data
+                models.item_edit(edit_item)
+                items = models.items_get_by_category(category_id)
+                return render_template('categories/show.html',
+                                       category=category,
+                                       items=items, form=form, user=user)
+            else:
+                return render_template('items/edit.html', category=category,
+                                       item=edit_item, form=form, user=user)
+        else:
+            flash("You aren't the owner for that.")
+            return redirect(url_for('showCategory', category_id=category_id))
     else:
-        return render_template('items/edit.html', category=category,
-                               item=edit_item, form=form, user=user)
+        return redirect(url_for('showCategory', category_id=category_id))
 
 
 # Create a delete page for items.
 @app.route('/category/<int:category_id>/item/<int:item_id>/delete',
            methods=['GET', 'POST'])
 def deleteItem(category_id, item_id):
-    delete_item = models.item_get(item_id)
-    category = models.category_get(category_id)
-    user_id = models.getUserID(login_session['email'])
-    user = models.getUserInfo(user_id)
-    if request.method == 'POST':
-        models.item_delete(delete_item)
-        return redirect(url_for('showCategory', category_id=category.id))
+    if 'email' in login_session.keys():
+        delete_item = models.item_get(item_id)
+        user_id = models.getUserID(login_session['email'])
+        if delete_item.user_id == user_id:
+            category = models.category_get(category_id)
+            user = models.getUserInfo(user_id)
+            if request.method == 'POST':
+                models.item_delete(delete_item)
+                return redirect(url_for('showCategory',
+                                        category_id=category.id))
+            else:
+                return render_template('items/delete.html', category=category,
+                                       item=delete_item, user=user)
+        else:
+            flash("You aren't the owner for that.")
+            return redirect(url_for('showCategory', category_id=category_id))
     else:
-        return render_template('items/delete.html', category=category,
-                               item=delete_item, user=user)
+        return redirect(url_for('showCategory', category_id=category_id))
 
 
 # Create a page for each item.

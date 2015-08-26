@@ -15,7 +15,15 @@
         </ul>
       </div>
     </nav>
-
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-danger flashes">
+            <strong>Oh snap!</strong> {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <div class="col-md-8 col-md-offset-2 well">
       <h2 class='text-center'>{{ category.name }}</h2>
       <p class ='text-center'>Please view the list below for items ready to be adopted</p>
