@@ -125,6 +125,7 @@ def deleteCategory(category_id):
         delete_category = models.category_get(category_id)
         user_id = models.getUserID(login_session['email'])
         if delete_category.user_id == user_id:
+            form = forms.deleteForm(request.form)
             if request.method == 'POST':
                 # Delete the category out of the DB.
                 models.category_delete(delete_category)
@@ -134,7 +135,8 @@ def deleteCategory(category_id):
                 # If the route is requested via GET render the delete page.
                 user = models.getUserInfo(user_id)
                 return render_template('categories/delete.html',
-                                       category=delete_category, user=user)
+                                       category=delete_category, user=user,
+                                       form=form)
         else:
             flash("You aren't the owner for that.")
             return redirect(url_for('index'))
@@ -230,6 +232,7 @@ def deleteItem(category_id, item_id):
         delete_item = models.item_get(item_id)
         user_id = models.getUserID(login_session['email'])
         if delete_item.user_id == user_id:
+            form = forms.deleteForm(request.form)
             category = models.category_get(category_id)
             user = models.getUserInfo(user_id)
             if request.method == 'POST':
@@ -238,7 +241,7 @@ def deleteItem(category_id, item_id):
                                         category_id=category.id))
             else:
                 return render_template('items/delete.html', category=category,
-                                       item=delete_item, user=user)
+                                       item=delete_item, user=user, form=form)
         else:
             flash("You aren't the owner for that.")
             return redirect(url_for('showCategory', category_id=category_id))

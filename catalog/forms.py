@@ -30,3 +30,9 @@ class itemForm(Form):
                                                 validators.Length(max=250,
                                                 message="Let's keep this to \
                                                 250 characters!")])
+
+
+class deleteForm(Form):
+    name = StringField('Name', [validators.InputRequired(),
+                                validators.Length(max=30,
+                                message="Let's keep this to 30 characters!")])

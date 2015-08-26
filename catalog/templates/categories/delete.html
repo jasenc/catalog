@@ -17,9 +17,10 @@
     </nav>
     <form class="well bs-component clearfix" action="{{ url_for('deleteCategory', category_id=category.id) }}" method="POST">
       <legend>Delete Category</legend>
+      {{ form.csrf_token }}
       <div class="form-group col-xs-12">
         <label for="category-name">Name</label>
-        <input type="text" class="form-control"  id="category-name" value="{{ category.name }}" name="name" disabled>
+        {{ form.name(class="form-control", value=category.name, disabled="True") }}
       </div>
       <a href="{{ url_for('index') }}" class="btn btn-default btn-left">Cancel</a>
       <input type="submit" class="btn btn-danger btn-right" value="Delete Category">

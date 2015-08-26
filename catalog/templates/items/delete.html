@@ -17,10 +17,11 @@
       </div>
     </nav>
     <form class="well bs-component clearfix col-md-8 col-md-offset-2" action="{{ url_for('deleteItem', category_id=category.id, item_id=item.id) }}" method="POST">
-      <legend>Delete category</legend>
+      <legend>Delete Item</legend>
+      {{ form.csrf_token }}
       <div class="form-group col-xs-12">
         <label for="category-name">Name</label>
-        <input type="text" class="form-control"  id="category-name" value="{{ item.name }}" name="name" disabled>
+        {{ form.name(class="form-control", value=category.name, disabled="True") }}
       </div>
       <a href="{{ url_for('showCategory', category_id=category.id) }}" class="btn btn-default btn-left">Cancel</a>
       <input type="submit" class="btn btn-danger btn-right" value="Delete Item">
