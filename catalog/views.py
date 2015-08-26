@@ -2,7 +2,7 @@ from catalog import app
 from catalog import models
 from catalog import forms
 from flask import (render_template, request, redirect, url_for,
-                   make_response, flash, jsonify)
+                   make_response, flash, jsonify, Response)
 # To keep track of our user sessions we'll import the session dictionary and
 # assign it a local name of login_session.
 from flask import session as login_session
@@ -19,6 +19,9 @@ import httplib2
 import requests
 # We'll import the JSON encoder and decoder for easy interaction with JSON.
 import json
+# Let's try making some xml endpoints too.
+from dicttoxml import dicttoxml
+from xml.dom.minidom import parseString
 
 
 # Load up our app information for the Google+ sign in.
@@ -414,4 +417,31 @@ def categoryJSON(category_id):
 def itemJSON(category_id, item_id):
     category = models.category_get(category_id)
     item = models.item_get(item_id)
-    return jsonify(CatalogItems=[item.serialize])
+    return jsonify(CatalogItem=[item.serialize])
+
+
+# Alright and finally we have some XML endpoints.
+@app.route('/category/<int:category_id>/XML')
+def categoryXML(category_id):
+    category = models.category_get(category_id)
+    items = models.items_get_by_category(category_id)
+    # For XML we will need a dictionary instead of a list.
+    page = {'CatalogItems': [i.serialize for i in items]}
+    # Convert that dictionary using the dicttoxml library.
+    xml = dicttoxml(page)
+    # Use Python's parseString to build a DOM for us.
+    dom = parseString(xml)
+    # Return that DOM making sure to tell the server our response is going
+    # to be XML instead of HTML and while we're at it let's make that XML
+    # look pretty and easy to read.
+    return Response(dom.toprettyxml(), mimetype='text/xml')
+
+
+@app.route('/category/<int:category_id>/item/<int:item_id>/XML')
+def itemXML(category_id, item_id):
+    category = models.category_get(category_id)
+    item = models.item_get(item_id)
+    page = {'CatalogItem': [item.serialize]}
+    xml = dicttoxml(page)
+    dom = parseString(xml)
+    return Response(dom.toprettyxml(), mimetype='text/xml')

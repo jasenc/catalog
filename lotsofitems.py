@@ -23,36 +23,31 @@ session.commit()
 
 item1 = Items(user_id=1, category_id=1, name="Eat More Better",
               image="http://ecx.images-amazon.com/images/I/515gkVfz2XL._SX369_BO1,204,203,200_.jpg",  # noqa
-              description="From the creator of The Sporkful you'll learn how \
-              to make every bite more delicious.")
+              description="From the creator of The Sporkful you'll learn how to make every bite more delicious.")  # noqa for better JSON endpoints.
 session.add(item1)
 session.commit()
 
 item2 = Items(user_id=1, category_id=1, name="One More Thing",
               image="http://ecx.images-amazon.com/images/I/41UHH8%2BxvjL._SX322_BO1,204,203,200_.jpg",  # noqa
-              description="A star from the office, B.J. Novak, writes a book \
-              and it's hilarious.")
+              description="A star from the office, B.J. Novak, writes a book and it's hilarious.")  # noqa
 session.add(item2)
 session.commit()
 
 item3 = Items(user_id=1, category_id=1, name="More Than This",
               image="http://ecx.images-amazon.com/images/I/61Iu7%2BpTRlL._SX307_BO1,204,203,200_.jpg",  # noqa
-              description="Patrick Ness writes a book about the afterlife, or \
-              is that what he wants you to think?")
+              description="Patrick Ness writes a book about the afterlife, or is that what he wants you to think?")  # noqa
 session.add(item3)
 session.commit()
 
 item4 = Items(user_id=1, category_id=1, name="You Are A Badass",
               image="http://ecx.images-amazon.com/images/I/41kxQN5Zq7L._SX314_BO1,204,203,200_.jpg",  # noqa
-              description="Doesn't everybody want to learn how to be a \
-              badass?")
+              description="Doesn't everybody want to learn how to be a badass?")  # noqa
 session.add(item4)
 session.commit()
 
 item5 = Items(user_id=1, category_id=1, name="The Cairo Affair",
               image="http://ecx.images-amazon.com/images/I/51wjILOG4vL._SX331_BO1,204,203,200_.jpg",  # noqa
-              description="Spy mystery novel about an affair in Cairo, as you \
-              probably gathered by the cover...")
+              description="Spy mystery novel about an affair in Cairo, as you probably gathered by the cover...")  # noqa
 session.add(item5)
 session.commit()
 
@@ -65,45 +60,30 @@ session.commit()
 
 item6 = Items(user_id=1, category_id=2, name="Drive",
               image="https://upload.wikimedia.org/wikipedia/en/1/13/Drive2011Poster.jpg",  # noqa
-              description="Ryan Gosling stars as a Los Angeles wheelman for hire, \
-                     stunt driving for movie productions by day and steering \
-                     getaway vehicles for armed heists by night.")
+              description="Ryan Gosling stars as a Los Angeles wheelman for hire, stunt driving for movie productions by day and steering getaway vehicles for armed heists by night.")  # noqa
 session.add(item6)
 session.commit()
 
 item7 = Items(user_id=1, category_id=2, name="Burn After Reading",
               image="https://upload.wikimedia.org/wikipedia/en/a/ae/Burn_After_Reading.jpg",  # noqa
-              description="At the headquarters of the Central \
-                                 Intelligence Agency in Arlington, Va., \
-                                 analyst Osborne Cox arrives for a top-secret \
-                                 meeting.")
+              description="At the headquarters of the Central Intelligence Agency in Arlington, Va., analyst Osborne Cox arrives for a top-secret meeting.")  # noqa
 session.add(item7)
 session.commit()
 
 item8 = Items(user_id=1, category_id=2, name="Ex Machina",
               image="http://t3.gstatic.com/images?q=tbn:ANd9GcQe8L-1PTMlUf-si2Oy6BTd9ZtbWH7BSRSF5k5JGNATxOHzyIdg",  # noqa
-              description="A programmer at an internet-search giant, wins a \
-                          competition to spend a week at the private mountain \
-                          estate of the company\'s brilliant and reclusive \
-                          CEO.")
+              description="A programmer at an internet-search giant, wins a competition to spend a week at the private mountain estate of the company\'s brilliant and reclusive CEO.")  # noqa
 session.add(item8)
 session.commit()
 
 item9 = Items(user_id=1, category_id=2, name="Interstellar",
               image="http://t1.gstatic.com/images?q=tbn:ANd9GcRf61mker2o4KH3CbVE7Zw5B1-VogMH8LfZHEaq3UdCMLxARZAB",  # noqa
-              description="With our time on Earth coming to an end, a team of \
-                           explorers undertakes the most important mission in \
-                           human history; traveling beyond this galaxy to \
-                           discover whether mankind has a future among the \
-                           stars.")
+              description="With our time on Earth coming to an end, a team of explorers undertakes the most important mission in human history; traveling beyond this galaxy to discover whether mankind has a future among the stars.")  # noqa
 session.add(item9)
 session.commit()
 
 item10 = Items(user_id=1, category_id=2, name="Kingsman",
                image="http://t3.gstatic.com/images?q=tbn:ANd9GcTn2E6bqcLehK92h215qFnUpCYFqt02Iuwg-N4gVBmixzAXvGfZ",  # noqa
-               description="A super-secret spy organization that recruits an \
-                       unrefined but promising street kid into the agency\'s \
-                       ultra-competitive training program just as a global \
-                       threat emerges from a twisted tech genius.")
+               description="A super-secret spy organization that recruits and unrefined but promising street kid into the agency\'s ultra-competitive training program just as a global threat emerges from a twisted tech genius.")  # noqa
 session.add(item10)
 session.commit()
