@@ -51,6 +51,8 @@ class Categories(Base):
     description = Column(String(250), nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'))
     users = relationship(Users)
+    items = relationship("Items", cascade="all, delete-orphan",
+                         backref="parent")
 
     # For this table we will want to provide serialized data for APIs. We can
     # do this by using the property decorator.
@@ -74,8 +76,7 @@ class Items(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     users = relationship(Users)
     category_id = Column(Integer, ForeignKey('categories.id'))
-    categories = relationship(Categories, single_parent="true",
-                              cascade="all, delete-orphan")
+    categories = relationship(Categories, single_parent="true")
 
     @property
     def serialize(self):
