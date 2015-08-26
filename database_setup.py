@@ -74,7 +74,8 @@ class Items(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     users = relationship(Users)
     category_id = Column(Integer, ForeignKey('categories.id'))
-    categories = relationship(Categories)
+    categories = relationship(Categories, single_parent="true",
+                              cascade="all, delete-orphan")
 
     @property
     def serialize(self):
