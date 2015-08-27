@@ -19,6 +19,8 @@ from sqlalchemy import create_engine
 # SQLAlchemy classes.
 Base = declarative_base()
 
+from config import database
+
 
 # We'll create our first Table, which will be for Users since it will be our
 # only table that doesn't have a ForeignKey relationahip, and we will
@@ -90,7 +92,7 @@ class Items(Base):
 # With our tables properly set up it's time to connect to the database.
 # Create an instance of the create_engine and point it to the database we will
 # want to use.
-engine = create_engine('postgresql://localhost/catalogapp')
+engine = create_engine(database)
 
 # Finally we'll send all of our data that we created above to our database.
 Base.metadata.create_all(engine)
