@@ -90,7 +90,7 @@ class Items(Base):
 # With our tables properly set up it's time to connect to the database.
 # Create an instance of the create_engine and point it to the database we will
 # want to use.
-engine = create_engine('sqlite:///catalogitems.db')
+engine = create_engine('postgresql://localhost/catalogapp')
 
 # Finally we'll send all of our data that we created above to our database.
 Base.metadata.create_all(engine)

@@ -1,2 +1,2 @@
-# Config for development
+# Config for Production
 DEBUG = False
