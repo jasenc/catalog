@@ -7,7 +7,7 @@ from database_setup import Base, Users, Categories, Items
 from config import databases
 
 # Connect to database and create session
-engine = create_engine(database)
+engine = create_engine("DATABASE_URL")
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()

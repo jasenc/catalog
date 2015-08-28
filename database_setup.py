@@ -96,4 +96,4 @@ class Items(Base):
 engine = create_engine(database)
 
 # Finally we'll send all of our data that we created above to our database.
-Base.metadata.create_all(engine)
+Base.metadata.create_all("DATABASE_URL")
