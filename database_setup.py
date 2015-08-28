@@ -1,6 +1,7 @@
 # Import system-specific parameters and functions for interacting with the
 # Python interpreter.
 import sys
+import os
 
 # From SQLAlchemy import the necessary classes to build our DB.
 from sqlalchemy import Column, ForeignKey, Integer, String
@@ -93,7 +94,10 @@ class Items(Base):
 # With our tables properly set up it's time to connect to the database.
 # Create an instance of the create_engine and point it to the database we will
 # want to use.
-engine = create_engine("DATABASE_URL")
+
+# Connect to database and create session
+database_url = os.environ["DATABASE_URL"]
+engine = create_engine(database_url)
 
 # Finally we'll send all of our data that we created above to our database.
 Base.metadata.create_all(engine)
