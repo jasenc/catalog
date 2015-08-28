@@ -2,6 +2,8 @@
 from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Users, Categories, Items
+
+# Import our database variable.
 from config import database
 
 # Connect to database and create session

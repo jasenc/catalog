@@ -1,7 +1,9 @@
-# Debug off for Production
+SECRET_KEY = "this_is_my_super_secret_development_(and_maybe_also_production)_key"  # noqa
+
+# Development
+# DEBUG = True
+# database = 'postgresql://localhost/catalogapp'
+
+# Production
 DEBUG = False
-
-# Local database (comment out in Production)
 database = 'postgresql://localhost/catalogapp'
-
-# Production database (comment out in local)

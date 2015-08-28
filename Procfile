@@ -1,1 +1,1 @@
-web: gunicorn fathomless-cove-4387:app
+web: gunicorn runserver:app --log-file=-

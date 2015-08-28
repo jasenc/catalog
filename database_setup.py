@@ -14,12 +14,13 @@ from sqlalchemy.ext.declarative import declarative_base
 # Import create_engine so we can communicate with the database.
 from sqlalchemy import create_engine
 
+# Import our database variable.
+from config import database
+
 # First lets create a local class of declarative_base, this will be used to
 # create our tables and indicate to SQLAlchemy that our Tables are in fact
 # SQLAlchemy classes.
 Base = declarative_base()
-
-from config import database
 
 
 # We'll create our first Table, which will be for Users since it will be our
