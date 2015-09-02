@@ -26,7 +26,7 @@ from xml.dom.minidom import parseString
 
 # Load up our app information for the Google+ sign in.
 CLIENT_ID = json.loads(
-    open('google_client_secrets.json',
+    open('/var/www/catalog/google_client_secrets.json',
          'r').read())['web']['client_id']
 APPLICATION_NAME = "Catalog App"
 
@@ -285,7 +285,7 @@ def gconnect():
     try:
         # Upgrade the authorization code into a credentials object.
         oauth_flow = (flow_from_clientsecrets
-                      ('google_client_secrets.json', scope=''))
+                      ('/var/www/catalog/google_client_secrets.json', scope=''))
         # Somehow the following line of code indicates that this is the
         # one-time-use code the server will be sending off.
         oauth_flow.redirect_uri = 'postmessage'
