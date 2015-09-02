@@ -1,6 +1,6 @@
 from catalog import app
-from catalog import models
-from catalog import forms
+import models
+import forms
 from flask import (render_template, request, redirect, url_for,
                    make_response, flash, jsonify, Response)
 # To keep track of our user sessions we'll import the session dictionary and
