@@ -2,6 +2,6 @@
 from catalog import app
 
 if __name__ == '__main__':
-    app.secret_key = 'super_secret_key'
+    app.secret_key = 'this_is_my_super_secret_development_(not_production)_key'
     app.debug = True
-    app.run(host='0.0.0.0', port=8080)
+    app.run()
