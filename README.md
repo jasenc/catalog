@@ -1,6 +1,6 @@
 # Catalog
 
-This Web App is being developed to create a catalog of various items throughout various categories. Development was done in Flask along with various extensions, SQLite3, and Bootstrap assisting for style. 
+This Web App is being developed to create a catalog of various items throughout various categories. Development was done in Flask along with various extensions, SQLite3, and Bootstrap assisting for style.
 
 This Web App has the following features:
 
@@ -13,18 +13,13 @@ This Web App has the following features:
 
 ## Installation
 
-If one should choose to use this Web App for their own personal use please follow these guides to ensure proper functionality.
-
-* Clone this repository.
-* Download necessary packages in to your working directory using `pip freeze > requirements.txt`.
-* Run `python database_setup.py`.
-* Run `python lotsofitems.py`.
-* Run `python runserver.py`.
-* Navigate to `localhost:5000` in your favorite browser.
+There are files missing as well as global variables that need to be set in
+order tun run locally, you are on your own here. Alternatively check it out
+live at [Catalog App](http://ec2-52-88-32-23.us-west-2.compute.amazonaws.com).
 
 ## Authors
 Jasen Carroll  
-jasen.c8@gmail.com  
+jasen.c@icloud.com  
 August 21st, 2015
 
 ## Issues and Feature Requests
