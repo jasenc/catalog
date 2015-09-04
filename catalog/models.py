@@ -5,9 +5,11 @@ from database_setup import Base, Users, Categories, Items
 
 # Import our database variable.
 from config import database
+import os
 
 # Connect to database and create session
-engine = create_engine(database)
+database_url = os.environ["DATABASE_URL"]
+engine = create_engine(database_url)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()

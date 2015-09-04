@@ -1,6 +1,6 @@
 from catalog import app
-from catalog import models
-from catalog import forms
+import models
+import forms
 from flask import (render_template, request, redirect, url_for,
                    make_response, flash, jsonify, Response)
 # To keep track of our user sessions we'll import the session dictionary and
@@ -26,7 +26,7 @@ from xml.dom.minidom import parseString
 
 # Load up our app information for the Google+ sign in.
 CLIENT_ID = json.loads(
-    open('instance/google_client_secrets.json',
+    open('/var/www/catalog/google_client_secrets.json',
          'r').read())['web']['client_id']
 APPLICATION_NAME = "Catalog App"
 
@@ -285,7 +285,7 @@ def gconnect():
     try:
         # Upgrade the authorization code into a credentials object.
         oauth_flow = (flow_from_clientsecrets
-                      ('instance/google_client_secrets.json', scope=''))
+                      ('/var/www/catalog/google_client_secrets.json', scope=''))
         # Somehow the following line of code indicates that this is the
         # one-time-use code the server will be sending off.
         oauth_flow.redirect_uri = 'postmessage'
