@@ -17,7 +17,7 @@ This Web App has the following features:
 
 There are files missing as well as global variables that need to be set in
 order tun run locally, you are on your own here. Alternatively check it out
-live at [Catalog App](http://ec2-52-88-32-23.us-west-2.compute.amazonaws.com).
+live at [Catalog App](https://fathomless-cove-4387.herokuapp.com/).
 
 Note: the client information for Google Oauth has been removed from this repository and will not work locally without the missing information.
 
