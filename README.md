@@ -1,6 +1,6 @@
 # Catalog
 
-This application can be seen live at [Catalog App](http://ec2-52-88-32-23.us-west-2.compute.amazonaws.com).
+This application can be seen live at [Catalog App](https://fathomless-cove-4387.herokuapp.com/).
 
 This Web App is being developed to create a catalog of various items throughout various categories. Development was done in Flask along with various extensions, SQLite3, and Bootstrap assisting for style.
 
